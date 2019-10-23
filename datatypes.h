@@ -5,4 +5,11 @@
 #define datatypes
 // tipos de dados usados no programa
 
+typedef vertice
+{
+    float x,y,z;
+}vertice;
+
+
+
 #endif
