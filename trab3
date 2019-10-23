@@ -1,0 +1,10 @@
+vt, vp, vn devem ser ignorados
+a coordenada deve ser lida como float ou double
+v são as vertices, cada uma tem as 3 posições
+f é uma face, formada sempre por no minimo 3 vertices
+a face sempre sera um plano
+as vertices das faces se fecham em um circo
+quando achar uma face sempre pega apenas o primeiro elemento
+ex: 3/4. pega apenas o 3
+as linhas também devem ser ignoradas
+
