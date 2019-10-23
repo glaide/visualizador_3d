@@ -8,3 +8,38 @@ quando achar uma face sempre pega apenas o primeiro elemento
 ex: 3/4. pega apenas o 3
 as linhas também devem ser ignoradas
 
+ajustar os pontos para o intervalo da janela que o professor irá passar
+fazer isso tanto pra x quanto pra y
+xmin= é o menor x que tem nas coordenadas
+xmax= é o maior x que tem nas coordenadas
+xcentro=min+max/2
+
+ESCALA
+W: largura da janela de desenho (em pixels)
+H: altura da janela de desenho (em pixels)
+escx = W / xdif
+escy = H / ydif
+escala = min (escx, escy)
+a escala usada sera a menor das duas dadas
+
+∀ (x y) PARA TODO X E Y
+x'p = xp - xcen
+y'p = yp - ycen
+
+
+∀ (x y)
+essa escala pode ser multiplicada por 0.9 ou 0,95 para ficar um pouco menor que a janela 
+xd = ( (xp - xcen) * escala) + W / 2
+yd = ( (yp - ycen) * escala) + H / 2
+
+
+QUANDO LER UMA FACE DECOMPOR EM UM CONJUNTO DE LINHAS PARA FACILITAR
+quando uma linha é feita, ela sera usada em duas faces, entao depois é necessário excluir uma linha
+usar sdl
+
+
+wireframe.c: arquivo principal
+datatypes.h: tipos de dados usados no programa
+objread.c/h: funções de leitura do arquivo OBJ
+perspect.c/h: funções de cálculo de perspectiva
+graphics.c/h: funções de apresentação gráfica
