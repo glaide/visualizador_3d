@@ -9,7 +9,7 @@
 #include <SDL/SDL_image.h> 
 #include <SDL/SDL_timer.h> 
 
-int main(int argv, char** argv)
+int main(int argc, char** argv)
 {
     FILE **obj;
 // returns zero on success else non-zero 
