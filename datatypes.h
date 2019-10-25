@@ -1,11 +1,11 @@
 // Glaide de Lara Oliveira
 // GRR20184567
 
-#ifndef datatypes
-#define datatypes
+#ifndef __DATATYPES__
+#define __DATATYPES__
 // tipos de dados usados no programa
 
-typedef vertice
+typedef struct vertice
 {
     float x,y,z;
 }vertice;
