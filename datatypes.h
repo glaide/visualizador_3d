@@ -10,6 +10,10 @@ typedef struct vertice
     float x,y,z;
 }vertice;
 
-
+typedef struct lista
+{
+    vertice *conteudo;
+    struct lista *prox;
+}lista;
 
 #endif

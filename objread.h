@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 //funcao para leitura do objeto
-void leObj(FILE **obj, int argc, char**argv);
+void leObj(FILE *obj, int argc, char**argv);
 
 
 #endif

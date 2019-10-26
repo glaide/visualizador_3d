@@ -4,8 +4,8 @@
 #include "objread.h"
 #include "datatypes.h"
 // funções de leitura do arquivo OBJ
-
-void leObj(FILE **obj, int argc, char**argv)
+//funcao que abbre o objeto e verifica se foi aberto corretamente
+void leObj(FILE *obj, int argc, char**argv)
 {
     //verifica qual tipo de abertura do arquivo será feita
     if (argc == 1)
@@ -19,3 +19,11 @@ void leObj(FILE **obj, int argc, char**argv)
         exit(-1);
     }
 }
+//funcao que le um vertice
+void leVert()
+{
+    
+}
+//funcao que cria uma lista de faces
+struct lista* cria_lista()
+{}
