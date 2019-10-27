@@ -10,6 +10,8 @@
 int main(int argc, char** argv)
 {
     FILE *obj;
+    int tamV, **matriz;
+
     // returns zero on success else non-zero 
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)  
         printf("error initializing SDL: %s\n", SDL_GetError()); 
@@ -20,5 +22,13 @@ int main(int argc, char** argv)
 
     //le o arquivo e verifica se foi aberto corretamente
     leObj(obj,argc, argv);
+
+    //recebe a quantidade de vertices 
+    tamV=tamvert(obj);
+    
+
+
+
+
     return 0; 
 }

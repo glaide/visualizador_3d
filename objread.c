@@ -1,5 +1,7 @@
-// Glaide de Lara Oliveira
-// GRR20184567
+/* 
+Glaide de Lara Oliveira
+GRR20184567
+*/ 
 
 #include "objread.h"
 #include "datatypes.h"
@@ -20,15 +22,33 @@ void leObj(FILE *obj, int argc, char**argv)
         exit(-1);
     }
 }
-//funcao que le um vertice
-void leVert(FILE *obj)
+
+//le o numero de vertices
+int tamvert(FILE *obj)
 {
     char conteudo;
+    //variavel usada para contar o numero de vertices
+    int tam=0;
     conteudo=fgetc(obj);
     //verifica se é uma linha de vertices
-    if (conteudo == 'v' && fgetc(obj)== ' ') 
-
+    while (conteudo != EOF)
+    {
+        //verifica se é um vertice, caso sim, acrescenta +1
+        if (conteudo == 'v') 
+        {
+        tam++;
+        //vai até o fim da linha
+        while (conteudo != '\n')
+            conteudo=fgetc(obj);
+        //le novamente para testar se é outra vertice
+        conteudo=fgetc(obj);
+        }
+    }
+    //volta para o inicio do arquivo
+    rewind(obj);
+    return tam;
 }
+
 //funcao que cria uma lista de faces
 struct lista* cria_lista(struct lista* aux)
 {
