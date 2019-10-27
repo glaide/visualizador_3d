@@ -49,6 +49,11 @@ int tamvert(FILE *obj)
     return tam;
 }
 
+void leVert(FILE *obj, vertice *vetor)
+{
+    
+}
+
 //funcao que cria uma lista de faces
 struct lista* cria_lista(struct lista* aux)
 {

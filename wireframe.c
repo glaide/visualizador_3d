@@ -10,7 +10,7 @@
 int main(int argc, char** argv)
 {
     FILE *obj;
-    int tamV, **matriz;
+    int tamv, **matriz;
 
     // returns zero on success else non-zero 
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)  
@@ -24,8 +24,14 @@ int main(int argc, char** argv)
     leObj(obj,argc, argv);
 
     //recebe a quantidade de vertices 
-    tamV=tamvert(obj);
+    tamv=tamvert(obj);
     
+    //aloca um vetor para os vertices
+    vertice *vetor=(vertice*)malloc(tamv*sizeof(vertice));
+    
+    //le os valores do vertice e salva no vetor
+
+
 
 
 
