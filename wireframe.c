@@ -33,14 +33,17 @@ int main(int argc, char** argv)
     //le os valores do vertice e salva no vetor
     nvert=leVert(obj,vertice);
 
+    /*verifica a quantidade de vertices para saber 
+    se é necessario uma nova alocação de memória*/
     if (tam > nvert)
-        vertice=realloc(vertice,nvert*sizeof(float));
-    if(!vertice)
     {
-        printf("Erro na alocação de memória, tente novamente...");
-        exit(-1);
+        vertice=realloc(vertice, colvert*nvert*sizeof(float));
+        if(!vertice)
+        {
+            printf("Erro na alocação de memória, tente novamente...");
+            exit(-1);
+        }
     }
-
 
 
 

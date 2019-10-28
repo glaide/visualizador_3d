@@ -7,7 +7,7 @@ GRR20184567
 #include "datatypes.h"
 #include <string.h>
 // funções de leitura do arquivo OBJ
-//funcao que abbre o objeto e verifica se foi aberto corretamente
+//funcao que abre o objeto e verifica se foi aberto corretamente
 void leObj(FILE *obj, int argc, char**argv)
 {
     //verifica qual tipo de abertura do arquivo será feita
@@ -23,32 +23,7 @@ void leObj(FILE *obj, int argc, char**argv)
     }
 }
 
-//le o numero de vertices
-int tamvert(FILE *obj)
-{
-    char conteudo;
-    //variavel usada para contar o numero de vertices
-    int tam=0;
-    conteudo=fgetc(obj);
-    //verifica se é uma linha de vertices
-    while (conteudo != EOF)
-    {
-        //verifica se é um vertice, caso sim, acrescenta +1
-        if (conteudo == 'v') 
-        {
-        tam++;
-        //vai até o fim da linha
-        while (conteudo != '\n')
-            conteudo=fgetc(obj);
-        //le novamente para testar se é outra vertice
-        conteudo=fgetc(obj);
-        }
-    }
-    //volta para o inicio do arquivo
-    rewind(obj);
-    return tam;
-}
-
+//le os vertices e retorna o valor total
 int leVert(FILE *obj, float *vetor)
 {
     char texto[tam];
@@ -74,7 +49,8 @@ int leVert(FILE *obj, float *vetor)
             nvert++;            
         }
     }
-    
+    /*retorna  a quantidade de vertices para caso 
+    seja necessario uma nova alocação de memória*/
     return nvert;
 }
 
@@ -87,6 +63,7 @@ int leVert(FILE *obj, float *vetor)
 //    return aux;
 //}
 
+//funcao que pula os comentarios
 void ignora_comentario(FILE *obj)
 {
     char lixo;
