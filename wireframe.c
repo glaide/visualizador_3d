@@ -53,7 +53,7 @@ int main(int argc, char** argv)
         exit(-1);
     }
     //le o numero de vertices em cada face e salva seus indices 
-    nfaces=leFaces(obj,faces);
+    leFaces(obj,faces);
 
     return 0; 
 }

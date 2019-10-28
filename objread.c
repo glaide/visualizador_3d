@@ -58,7 +58,7 @@ int leVert(FILE *obj, float *vetor)
 char *corte(char *str)
 {
     //ira dividir a palavra por / e retornar apenas a primeira parte
-    char *aux=NULL  
+    char *aux=NULL;  
     aux=strtok(str, "/");
     return aux;
 }
@@ -80,7 +80,7 @@ void ignora_comentario(FILE *obj)
     ungetc(lixo,obj);
 }
 /*----------------LE NUMERO DE FACES E SEUS VALORES----------------------*/
-int leFaces(FILE *obj, int *faces)
+void leFaces(FILE *obj, int *faces)
 {
     char texto[tam];
     char *str=NULL;
@@ -113,7 +113,7 @@ int leFaces(FILE *obj, int *faces)
         }
     }
     if (maxvert < colfaces && maxfaces < tam )
-        faces=realloc(faces, maxfaces*maxvert(sizeof(int)));
-    else ( maxfaces < tam)
-        faces=realloc(faces, maxfaces*colvert(sizeof(int)));
+        faces=realloc(faces, maxfaces*maxvert*sizeof(int));
+    else if ( maxfaces < tam)
+        faces=realloc(faces, maxfaces*colvert*sizeof(int));
 }
