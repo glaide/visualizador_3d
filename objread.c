@@ -49,19 +49,43 @@ int tamvert(FILE *obj)
     return tam;
 }
 
-void leVert(FILE *obj, vertice *vetor)
+int leVert(FILE *obj, float *vetor)
 {
+    char texto[tam];
+    int nvert=0;
+    char *str=NULL;    
+    //salva o conteudo do objeto num vetor de char para poder cortar
+    while (fgets(texto,sizeof(tam),obj) != NULL)
+    {
+        /*verifica o primeiro e segundo espaço do vetor, pois pode haver um 
+        v junto de outras palavras, de forma que não seja o conteudo procurado*/
+        if( texto[0]=='v' && texto[1]==' ' )
+        {
+            //recebe 'v '
+            str=strtok(texto, "\t\n ");
+            for (int i=0; i< colvert; i++)
+            {
+                //corta um novo pedaço
+                str=strtok(NULL, "\t\n ");
+                //salva no vetor já convertido para float
+                vetor[(nvert*colvert) + i]=atof(str);
+                //incrementa a variavel com a quantidade de vertices
+            }
+            nvert++;            
+        }
+    }
     
+    return nvert;
 }
 
 //funcao que cria uma lista de faces
-struct lista* cria_lista(struct lista* aux)
-{
-    vertice *aux->v=NULL;
-    struct lista *aux->prox=NULL;
-
-    return aux;
-}
+//struct lista* cria_lista(struct lista* aux)
+//{
+//    vertice *aux->v=NULL;
+//    struct lista *aux->prox=NULL;
+//
+//    return aux;
+//}
 
 void ignora_comentario(FILE *obj)
 {

@@ -5,14 +5,14 @@
 #define __DATATYPES__
 // tipos de dados usados no programa
 
-typedef struct vertice
-{
-    float x,y,z;
-}vertice;
+ //typedef struct vertice
+ //{
+ //    float x,y,z;
+ //}vertice;
 
 typedef struct lista
 {
-    vertice *conteudo;
+    void *conteudo;
     struct lista *prox;
 }lista;
 

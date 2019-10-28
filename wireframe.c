@@ -10,26 +10,36 @@
 int main(int argc, char** argv)
 {
     FILE *obj;
-    int tamv, **matriz;
-
+    int nvert;
     // returns zero on success else non-zero 
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)  
         printf("error initializing SDL: %s\n", SDL_GetError()); 
-     
-    SDL_Window* win = SDL_CreateWindow("GAME",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, 1000, 1000, 0); 
+    //arrumar o tamanho da tela
+    SDL_Window* win = SDL_CreateWindow("Visualizador 3D",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, 800, 600, 0); 
     while (1); 
   
 
     //le o arquivo e verifica se foi aberto corretamente
     leObj(obj,argc, argv);
-
-    //recebe a quantidade de vertices 
-    tamv=tamvert(obj);
     
     //aloca um vetor para os vertices
-    vertice *vetor=(vertice*)malloc(tamv*sizeof(vertice));
+    float *vertice=malloc(colvert * tam * sizeof(float));
+    if (!vertice)
+    {
+        printf("Erro na alocação de memória, tente novamente...");
+        exit(-1);
+    }
     
     //le os valores do vertice e salva no vetor
+    nvert=leVert(obj,vertice);
+
+    if (tam > nvert)
+        vertice=realloc(vertice,nvert*sizeof(float));
+    if(!vertice)
+    {
+        printf("Erro na alocação de memória, tente novamente...");
+        exit(-1);
+    }
 
 
 
