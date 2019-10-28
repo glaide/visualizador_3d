@@ -8,7 +8,7 @@ GRR20184567
 #include <string.h>
 // funções de leitura do arquivo OBJ
 //funcao que abre o objeto e verifica se foi aberto corretamente
-void leObj(FILE *obj, int argc, char**argv)
+void leObj(FILE *obj, int argc, char** argv)
 {
     //verifica qual tipo de abertura do arquivo será feita
     if (argc == 1)
@@ -37,11 +37,12 @@ int leVert(FILE *obj, float *vetor)
         if( texto[0]=='v' && texto[1]==' ' )
         {
             //recebe 'v '
-            str=strtok(texto, "\t\n ");
+            //verificar melhor delimitante
+            str=strtok(texto, " ");
             for (int i=0; i< colvert; i++)
             {
                 //corta um novo pedaço
-                str=strtok(NULL, "\t\n ");
+                str=strtok(NULL, " ");
                 //salva no vetor já convertido para float
                 vetor[(nvert*colvert) + i]=atof(str);
                 //incrementa a variavel com a quantidade de vertices
@@ -53,6 +54,8 @@ int leVert(FILE *obj, float *vetor)
     seja necessario uma nova alocação de memória*/
     return nvert;
 }
+
+
 
 //funcao que cria uma lista de faces
 //struct lista* cria_lista(struct lista* aux)

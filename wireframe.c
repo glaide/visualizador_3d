@@ -26,7 +26,7 @@ int main(int argc, char** argv)
     float *vertice=malloc(colvert * tam * sizeof(float));
     if (!vertice)
     {
-        printf("Erro na alocação de memória, tente novamente...");
+        printf("Erro na alocação de memória, tente novamente...\n");
         exit(-1);
     }
     
@@ -40,7 +40,7 @@ int main(int argc, char** argv)
         vertice=realloc(vertice, colvert*nvert*sizeof(float));
         if(!vertice)
         {
-            printf("Erro na alocação de memória, tente novamente...");
+            printf("Erro na alocação de memória, tente novamente...\n");
             exit(-1);
         }
     }
