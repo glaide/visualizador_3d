@@ -10,7 +10,7 @@
 int main(int argc, char** argv)
 {
     FILE *obj;
-    int nvert;
+    int nvert,nfaces;
     // returns zero on success else non-zero 
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)  
         printf("error initializing SDL: %s\n", SDL_GetError()); 
@@ -45,9 +45,15 @@ int main(int argc, char** argv)
         }
     }
 
-
-
-
+    //aloca um vetor que guardara os vertices de cada face
+    int *faces=malloc(tam * colfaces * sizeof(int));
+    if (!faces)
+    {
+        printf("Erro na alocação de memória, tente novamente...\n");
+        exit(-1);
+    }
+    //le o numero de vertices em cada face e salva seus indices 
+    nfaces=leFaces(obj,faces);
 
     return 0; 
 }

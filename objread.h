@@ -9,8 +9,9 @@ GRR20184567
 #define objread
 #include <stdio.h>
 #include <stdlib.h>
-#define tam 1000
+#define tam 20000
 #define colvert 3
+#define colfaces 20
 
 //funcao para leitura do objeto
 void leObj(FILE *obj, int argc, char**argv);
