@@ -23,7 +23,7 @@ void leObj(FILE *obj, int argc, char** argv)
     }
 }
 /*----------------LE NUMERO DE VERTICES E SEUS VALORES----------------------*/
-int leVert(FILE *obj, float *vetor)
+int leVert(FILE *obj, float **vetor)
 {
     char texto[tam];
     int nvert=0;
@@ -80,7 +80,7 @@ void ignora_comentario(FILE *obj)
     ungetc(lixo,obj);
 }
 /*----------------LE NUMERO DE FACES E SEUS VALORES----------------------*/
-int leFaces(FILE *obj, int *faces)
+int leFaces(FILE *obj, int **faces)
 {
     char texto[tam];
     char *str=NULL;

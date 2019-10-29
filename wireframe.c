@@ -14,7 +14,6 @@ int main(int argc, char** argv)
     // returns zero on success else non-zero 
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)  
         printf("error initializing SDL: %s\n", SDL_GetError()); 
-    //arrumar o tamanho da tela
     SDL_Window* win = SDL_CreateWindow("Visualizador 3D",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, 800, 600, 0); 
     while (1); 
   
@@ -63,7 +62,7 @@ int main(int argc, char** argv)
     nfaces=leFaces(obj,faces);
 
         //verifica se é necessário realocar memoria
-    if ( maxfaces < tam)
+    if ( nfaces < tam)
         faces=realloc(faces, nfaces*colvert*sizeof(int));
 
     return 0; 
