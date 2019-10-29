@@ -43,7 +43,7 @@ int leVert(FILE *obj, float *vetor)
                 //corta um novo pedaço
                 str=strtok(NULL, " ");
                 //salva no vetor já convertido para float
-                vetor[(nvert*colvert) + i]=atof(str);
+                vetor[nvert][i]=atof(str);
             }
             //incrementa a variavel com a quantidade de vertices
             nvert++;            
@@ -102,7 +102,7 @@ int leFaces(FILE *obj, int *faces)
                     str=strtok(NULL, " ");
                     //pega apenas o primeiro pedaço antes do /
                     str=corte(str);
-                    faces[(colvert*maxfaces) + i]=atoi(str);
+                    faces[maxfaces][i]=atoi(str);
                     //incrementa a variavel com a quantidade de vertices                    
                 }
             maxfaces++;
