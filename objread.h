@@ -11,7 +11,7 @@ GRR20184567
 #include <stdlib.h>
 #define tam 20000
 #define colvert 3
-#define colfaces 20
+#define colfaces 15
 
 //funcao para leitura do objeto
 void leObj(FILE *obj, int argc, char**argv);

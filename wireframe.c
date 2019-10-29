@@ -63,7 +63,7 @@ int main(int argc, char** argv)
 
         //verifica se é necessário realocar memoria
     if ( nfaces < tam)
-        faces=realloc(faces, nfaces*colvert*sizeof(int));
+        faces=realloc(faces, nfaces*colfaces*sizeof(int));
 
     return 0; 
 }
