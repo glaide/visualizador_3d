@@ -80,13 +80,12 @@ void ignora_comentario(FILE *obj)
     ungetc(lixo,obj);
 }
 /*----------------LE NUMERO DE FACES E SEUS VALORES----------------------*/
-void leFaces(FILE *obj, int *faces)
+int leFaces(FILE *obj, int *faces)
 {
     char texto[tam];
     char *str=NULL;
     /*variavel usada para verificar qual é o 
     maior numero de vertices em uma face*/
-    int maxvert=0;
     int maxfaces=0;
 
     while (fgets(texto,tam*sizeof(char),obj) != NULL)
@@ -97,23 +96,19 @@ void leFaces(FILE *obj, int *faces)
         {
             str=strtok(texto, " ");
             for (int i=0; i<colfaces; i++)
-            {
                 //laço para garantir que não ira pegar nenhum valor que seja 'f '
                 if (texto[0] != 'f' && texto[1] != ' ')
                 {
                     str=strtok(NULL, " ");
                     //pega apenas o primeiro pedaço antes do /
                     str=corte(str);
-                    faces[(maxvert*maxfaces) + i]=atoi(str);
+                    faces[(colvert*maxfaces) + i]=atoi(str);
                     //incrementa a variavel com a quantidade de vertices                    
-                    maxvert++;
                 }
-            }
             maxfaces++;
         }
     }
-    if (maxvert < colfaces && maxfaces < tam )
-        faces=realloc(faces, maxfaces*maxvert*sizeof(int));
-    else if ( maxfaces < tam)
-        faces=realloc(faces, maxfaces*colvert*sizeof(int));
+    
+    return maxfaces;
 }
+

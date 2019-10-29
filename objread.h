@@ -22,5 +22,10 @@ void ignora_comentario(FILE *obj);
 //le os vertices e retorna o valor total
 int leVert(FILE *obj, float *vetor);
 
+//le o numero de faces e os indices dos vertices
+int leFaces(FILE *obj, int *faces);
+
+//corta a string para pegar apenas a primeira parte
+char *corte(char *str);
 
 #endif

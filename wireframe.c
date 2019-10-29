@@ -23,7 +23,11 @@ int main(int argc, char** argv)
     leObj(obj,argc, argv);
     
     //aloca um vetor para os vertices
-    float *vertice=malloc(colvert * tam * sizeof(float));
+    //float *vertice=malloc(colvert * tam * sizeof(float));
+    float **vertice=malloc(tam * sizeof(float*));
+    for (int i=0; i<tam; i++)
+        vertice[i]=malloc(colvert*sizeof(float));
+
     if (!vertice)
     {
         printf("Erro na alocação de memória, tente novamente...\n");
@@ -46,14 +50,21 @@ int main(int argc, char** argv)
     }
 
     //aloca um vetor que guardara os vertices de cada face
-    int *faces=malloc(tam * colfaces * sizeof(int));
+    //int *faces=malloc(tam * colfaces * sizeof(int));
+    int **faces=malloc(tam * sizeof(int*));
+    for (int i=0; i<tam; i++)
+        faces[i]=malloc(colfaces*sizeof(int));
     if (!faces)
     {
         printf("Erro na alocação de memória, tente novamente...\n");
         exit(-1);
     }
     //le o numero de vertices em cada face e salva seus indices 
-    leFaces(obj,faces);
+    nfaces=leFaces(obj,faces);
+
+        //verifica se é necessário realocar memoria
+    if ( maxfaces < tam)
+        faces=realloc(faces, nfaces*colvert*sizeof(int));
 
     return 0; 
 }
