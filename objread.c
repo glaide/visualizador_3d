@@ -37,21 +37,22 @@ int leVert(FILE *obj, float **vetor)
         if( texto[0]=='v' && texto[1]==' ' )
         {
             //verificar melhor delimitante
+            // ARRUMAR INDICE DO VETOR
             //recebe 'v '
             str=strtok(texto, " ");
             // corta um novo pedaço   
             str=strtok(NULL, " ");
             // salva no vetor já convertido para float
-            vetor->x=str;
+            vetor[nvert]->x=str;
             str=strtok(NULL, " ");
-            vetor->y=str;
+            vetor[nvert]->y=str;
             str=strtok(NULL, " ");
-            vetor->z=str;
+            vetor[nvert]->z=str;
             //incrementa a variavel com a quantidade de vertices
             nvert++;            
         }
     }
-    
+ 
     if (nvert == tam) 
     {
         nova=tam+step+nova;
