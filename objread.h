@@ -9,7 +9,8 @@ GRR20184567
 #define objread
 #include <stdio.h>
 #include <stdlib.h>
-#define tam 20000
+#define tam 100
+#define step 100
 #define colvert 3
 #define colfaces 15
 

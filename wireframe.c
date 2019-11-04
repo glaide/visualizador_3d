@@ -11,21 +11,17 @@ int main(int argc, char** argv)
 {
     FILE *obj;
     int nvert,nfaces;
-    // returns zero on success else non-zero 
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)  
-        printf("error initializing SDL: %s\n", SDL_GetError()); 
-    SDL_Window* win = SDL_CreateWindow("Visualizador 3D",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, 800, 600, 0); 
-    while (1); 
-  
+    
 
     //le o arquivo e verifica se foi aberto corretamente
     leObj(obj,argc, argv);
     
     //aloca um vetor para os vertices
     //float *vertice=malloc(colvert * tam * sizeof(float));
-    float **vertice=malloc(tam * sizeof(float*));
+    // float **vertice=malloc(tam * sizeof(float*));
+    vert **vertice=malloc(tam * sizeof(vert*));
     for (int i=0; i<tam; i++)
-        vertice[i]=malloc(colvert*sizeof(float));
+        vertice[i]=malloc(sizeof(vert));
 
     if (!vertice)
     {
@@ -34,19 +30,19 @@ int main(int argc, char** argv)
     }
     
     //le os valores do vertice e salva no vetor
-    nvert=leVert(obj,vertice);
+    // nvert=leVert(obj,vertice);
 
     /*verifica a quantidade de vertices para saber 
     se é necessario uma nova alocação de memória*/
-    if (tam > nvert)
-    {
-        vertice=realloc(vertice, colvert*nvert*sizeof(float));
-        if(!vertice)
-        {
-            printf("Erro na alocação de memória, tente novamente...\n");
-            exit(-1);
-        }
-    }
+    // if (tam > nvert)
+    // {
+        // vertice=realloc(vertice, colvert*nvert*sizeof(float));
+        // if(!vertice)
+        // {
+            // printf("Erro na alocação de memória, tente novamente...\n");
+            // exit(-1);
+        // }
+    // }
 
     //aloca um vetor que guardara os vertices de cada face
     //int *faces=malloc(tam * colfaces * sizeof(int));
@@ -66,4 +62,16 @@ int main(int argc, char** argv)
         faces=realloc(faces, nfaces*colfaces*sizeof(int));
 
     return 0; 
+
+    // returns zero on success else non-zero 
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)  
+        printf("error initializing SDL: %s\n", SDL_GetError()); 
+    SDL_Window* win = SDL_CreateWindow("Visualizador 3D",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, 800, 600, 0); 
+    while (1); 
+
+    SDL_Delay(36);
+ 
+    SDL_DestroyWindow(win);
+    SDL_Quit();
+
 }

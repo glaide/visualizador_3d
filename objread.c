@@ -22,37 +22,85 @@ void leObj(FILE *obj, int argc, char** argv)
         exit(-1);
     }
 }
-/*----------------LE NUMERO DE VERTICES E SEUS VALORES----------------------*/
+
 int leVert(FILE *obj, float **vetor)
 {
     char texto[tam];
-    int nvert=0;
+    int nvert=0, nova=0;
+
     char *str=NULL;    
     //salva o conteudo do objeto num vetor de char para poder cortar
-    while (fgets(texto,tam*sizeof(char),obj) != NULL)
+    while ((fgets(texto,tam*sizeof(char),obj) != NULL) && (nvert<tam)) 
     {
         /*verifica o primeiro e segundo espaço do vetor, pois pode haver um 
         v junto de outras palavras, de forma que não seja o conteudo procurado*/
         if( texto[0]=='v' && texto[1]==' ' )
         {
-            //recebe 'v '
             //verificar melhor delimitante
+            //recebe 'v '
             str=strtok(texto, " ");
-            for (int i=0; i< colvert; i++)
-            {
-                //corta um novo pedaço
-                str=strtok(NULL, " ");
-                //salva no vetor já convertido para float
-                vetor[nvert][i]=atof(str);
-            }
+            // corta um novo pedaço   
+            str=strtok(NULL, " ");
+            // salva no vetor já convertido para float
+            vetor->x=str;
+            str=strtok(NULL, " ");
+            vetor->y=str;
+            str=strtok(NULL, " ");
+            vetor->z=str;
             //incrementa a variavel com a quantidade de vertices
             nvert++;            
         }
     }
+    
+    if (nvert == tam) 
+    {
+        nova=tam+step+nova;
+        // mudar isso para ser com as estruturas mas só depois que souber como ler
+        vetor=realloc(vetor, colvert*nova*sizeof(float));
+        if(!vetor)
+        {
+            printf("Erro na alocação de memória, tente novamente...\n");
+            exit(-1);
+        }
+    }
+    
+    
+    
     /*retorna  a quantidade de vertices para caso 
     seja necessario uma nova alocação de memória*/
     return nvert;
 }
+/*----------------LE NUMERO DE VERTICES E SEUS VALORES----------------------*/
+// int leVert(FILE *obj, float **vetor)
+// {
+    // char texto[tam];
+    // int nvert=0;
+    // char *str=NULL;    
+    // salva o conteudo do objeto num vetor de char para poder cortar
+    // while (fgets(texto,tam*sizeof(char),obj) != NULL)
+    // {
+        // /*verifica o primeiro e segundo espaço do vetor, pois pode haver um 
+        // v junto de outras palavras, de forma que não seja o conteudo procurado*/
+        // if( texto[0]=='v' && texto[1]==' ' )
+        // {
+            // recebe 'v '
+            // verificar melhor delimitante
+            // str=strtok(texto, " ");
+            // for (int i=0; i< colvert; i++)
+            // {
+                // corta um novo pedaço
+                // str=strtok(NULL, " ");
+                // salva no vetor já convertido para float
+                // vetor[nvert][i]=atof(str);
+            // }
+            // incrementa a variavel com a quantidade de vertices
+            // nvert++;            
+        // }
+    // }
+    // /*retorna  a quantidade de vertices para caso 
+    // seja necessario uma nova alocação de memória*/
+    // return nvert;
+// }
 /*----------------RECEBE UMA STRING E CORTA O PRIMEIRO PEDAÇO----------------------*/
 //funcao para retornar apenas a primeira parte do valor de faces
 char *corte(char *str)

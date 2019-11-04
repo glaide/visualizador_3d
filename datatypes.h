@@ -6,4 +6,10 @@
 #ifndef __DATATYPES__
 #define __DATATYPES__
 
+typedef struct vert
+{
+    float x,y,z;
+}vert;
+
+
 #endif
