@@ -27,6 +27,7 @@ void leVert(FILE *obj, vert *vetor)
 {
     char texto[tam];
     int nvert=0, nova=0;
+    float aux;
 
     char *str=NULL;    
     //salva o conteudo do objeto num vetor de char para poder cortar
@@ -44,7 +45,8 @@ void leVert(FILE *obj, vert *vetor)
                 // corta um novo pedaço   
                 str=strtok(NULL, " ");
                 // salva no vetor já convertido para float
-                vetor[nvert]->x=str;
+                aux=vetor[nvert];
+                aux->x=str;
                 str=strtok(NULL, " ");
                 vetor[nvert]->y=str;
                 str=strtok(NULL, " ");
