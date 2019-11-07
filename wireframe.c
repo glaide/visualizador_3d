@@ -10,19 +10,13 @@
 int main(int argc, char** argv)
 {
     FILE *obj;
-    int nvert,nfaces;
-    
 
     //le o arquivo e verifica se foi aberto corretamente
     leObj(obj,argc, argv);
     
     //aloca um vetor para os vertices
-    //float *vertice=malloc(colvert * tam * sizeof(float));
-    // float **vertice=malloc(tam * sizeof(float*));
-    vert **vertice=malloc(tam * sizeof(vert*));
-    for (int i=0; i<tam; i++)
-        vertice[i]=malloc(sizeof(vert));
-
+    vert *vertice=malloc(tam * sizeof(vert*));
+    //verifica se foi alocado corretamente
     if (!vertice)
     {
         printf("Erro na alocação de memória, tente novamente...\n");
@@ -30,22 +24,10 @@ int main(int argc, char** argv)
     }
     
     //le os valores do vertice e salva no vetor
-    // nvert=leVert(obj,vertice);
+    leVert(obj,vertice);
 
-    /*verifica a quantidade de vertices para saber 
-    se é necessario uma nova alocação de memória*/
-    // if (tam > nvert)
-    // {
-        // vertice=realloc(vertice, colvert*nvert*sizeof(float));
-        // if(!vertice)
-        // {
-            // printf("Erro na alocação de memória, tente novamente...\n");
-            // exit(-1);
-        // }
-    // }
-
+ 
     //aloca um vetor que guardara os vertices de cada face
-    //int *faces=malloc(tam * colfaces * sizeof(int));
     int **faces=malloc(tam * sizeof(int*));
     for (int i=0; i<tam; i++)
         faces[i]=malloc(colfaces*sizeof(int));
@@ -55,13 +37,7 @@ int main(int argc, char** argv)
         exit(-1);
     }
     //le o numero de vertices em cada face e salva seus indices 
-    nfaces=leFaces(obj,faces);
-
-        //verifica se é necessário realocar memoria
-    if ( nfaces < tam)
-        faces=realloc(faces, nfaces*colfaces*sizeof(int));
-
-    return 0; 
+    leFaces(obj,faces);
 
     // returns zero on success else non-zero 
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)  

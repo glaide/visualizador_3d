@@ -22,86 +22,53 @@ void leObj(FILE *obj, int argc, char** argv)
         exit(-1);
     }
 }
-
-int leVert(FILE *obj, float **vetor)
+/*----------------LE NUMERO DE VERTICES E SEUS VALORES----------------------*/
+void leVert(FILE *obj, vert *vetor)
 {
     char texto[tam];
     int nvert=0, nova=0;
 
     char *str=NULL;    
     //salva o conteudo do objeto num vetor de char para poder cortar
-    while ((fgets(texto,tam*sizeof(char),obj) != NULL) && (nvert<tam)) 
+    while (fgets(texto,tam*sizeof(char),obj) != NULL)  
     {
-        /*verifica o primeiro e segundo espaço do vetor, pois pode haver um 
-        v junto de outras palavras, de forma que não seja o conteudo procurado*/
-        if( texto[0]=='v' && texto[1]==' ' )
+        //verifica se o tamanho é suficiente para continuar a leitura
+        if (nvert<tam)
         {
-            //verificar melhor delimitante
-            // ARRUMAR INDICE DO VETOR
-            //recebe 'v '
-            str=strtok(texto, " ");
-            // corta um novo pedaço   
-            str=strtok(NULL, " ");
-            // salva no vetor já convertido para float
-            vetor[nvert]->x=str;
-            str=strtok(NULL, " ");
-            vetor[nvert]->y=str;
-            str=strtok(NULL, " ");
-            vetor[nvert]->z=str;
-            //incrementa a variavel com a quantidade de vertices
-            nvert++;            
-        }
-    }
- 
-    if (nvert == tam) 
-    {
-        nova=tam+step+nova;
-        // mudar isso para ser com as estruturas mas só depois que souber como ler
-        vetor=realloc(vetor, colvert*nova*sizeof(float));
-        if(!vetor)
-        {
-            printf("Erro na alocação de memória, tente novamente...\n");
-            exit(-1);
-        }
-    }
-    
-    
-    
-    /*retorna  a quantidade de vertices para caso 
-    seja necessario uma nova alocação de memória*/
-    return nvert;
-}
-/*----------------LE NUMERO DE VERTICES E SEUS VALORES----------------------*/
-// int leVert(FILE *obj, float **vetor)
-// {
-    // char texto[tam];
-    // int nvert=0;
-    // char *str=NULL;    
-    // salva o conteudo do objeto num vetor de char para poder cortar
-    // while (fgets(texto,tam*sizeof(char),obj) != NULL)
-    // {
-        // /*verifica o primeiro e segundo espaço do vetor, pois pode haver um 
-        // v junto de outras palavras, de forma que não seja o conteudo procurado*/
-        // if( texto[0]=='v' && texto[1]==' ' )
-        // {
-            // recebe 'v '
-            // verificar melhor delimitante
-            // str=strtok(texto, " ");
-            // for (int i=0; i< colvert; i++)
-            // {
-                // corta um novo pedaço
-                // str=strtok(NULL, " ");
+             /*verifica o primeiro e segundo espaço do vetor, pois pode haver um 
+            v junto de outras palavras, de forma que não seja o conteudo procurado*/
+            if( texto[0]=='v' && texto[1]==' ' )
+            {
+                //recebe 'v '
+                str=strtok(texto, " ");
+                // corta um novo pedaço   
+                str=strtok(NULL, " ");
                 // salva no vetor já convertido para float
-                // vetor[nvert][i]=atof(str);
-            // }
-            // incrementa a variavel com a quantidade de vertices
-            // nvert++;            
-        // }
-    // }
-    // /*retorna  a quantidade de vertices para caso 
-    // seja necessario uma nova alocação de memória*/
-    // return nvert;
-// }
+                vetor[nvert]->x=str;
+                str=strtok(NULL, " ");
+                vetor[nvert]->y=str;
+                str=strtok(NULL, " ");
+                vetor[nvert]->z=str;
+                //incrementa a variavel com a quantidade de vertices
+                nvert++;            
+            }
+        }
+        else if (nvert == tam) 
+        {
+            //atualizo um novo tamanho com a soma de + 100
+            nova=tam+step+nova;
+            vetor=realloc(vetor, nova*sizeof(vert*));
+            //verifica se foi alocado corretamente
+            if(!vetor)
+            {
+                printf("Erro na alocação de memória, tente novamente...\n");
+                exit(-1);
+            }
+        }
+    }
+   
+    return 0;
+}
 /*----------------RECEBE UMA STRING E CORTA O PRIMEIRO PEDAÇO----------------------*/
 //funcao para retornar apenas a primeira parte do valor de faces
 char *corte(char *str)
@@ -129,7 +96,7 @@ void ignora_comentario(FILE *obj)
     ungetc(lixo,obj);
 }
 /*----------------LE NUMERO DE FACES E SEUS VALORES----------------------*/
-int leFaces(FILE *obj, int **faces)
+void leFaces(FILE *obj, int **faces)
 {
     char texto[tam];
     char *str=NULL;
@@ -139,25 +106,41 @@ int leFaces(FILE *obj, int **faces)
 
     while (fgets(texto,tam*sizeof(char),obj) != NULL)
     {
-        /*verifica o primeiro e segundo espaço do vetor, pois pode haver um 
-        f junto de outras palavras, de forma que não seja o conteudo procurado*/
-        if ( texto[0] == 'f' && texto[1] == ' ')
+        //caso o tamanho alocado seja necessario
+        if (tam > maxfaces)
         {
-            str=strtok(texto, " ");
-            for (int i=0; i<colfaces; i++)
-                //laço para garantir que não ira pegar nenhum valor que seja 'f '
-                if (texto[0] != 'f' && texto[1] != ' ')
-                {
-                    str=strtok(NULL, " ");
-                    //pega apenas o primeiro pedaço antes do /
-                    str=corte(str);
-                    faces[maxfaces][i]=atoi(str);
-                    //incrementa a variavel com a quantidade de vertices                    
-                }
-            maxfaces++;
+            /*verifica o primeiro e segundo espaço do vetor, pois pode haver um 
+            f junto de outras palavras, de forma que não seja o conteudo procurado*/
+            if ( texto[0] == 'f' && texto[1] == ' ')
+            {
+                str=strtok(texto, " ");
+                for (int i=0; i<colfaces; i++)
+                    //laço para garantir que não ira pegar nenhum valor que seja 'f '
+                    if (texto[0] != 'f' && texto[1] != ' ')
+                    {
+                        str=strtok(NULL, " ");
+                        //pega apenas o primeiro pedaço antes do /
+                        str=corte(str);
+                        faces[maxfaces][i]=atoi(str);
+                        //incrementa a variavel com a quantidade de vertices                    
+                    }
+                maxfaces++;
+            }
+        }
+        //caso seja necessario fazer uma nova alocaçao
+        else if (tam == maxfaces)
+        {
+            //atualizo um novo tamanho com a soma de + 100
+            nova=tam+step+nova;
+            faces=realloc(faces, nova*colfaces*sizeof(int));
+            //verifica se foi alocado corretamente
+            if(!vetor)
+            {
+                printf("Erro na alocação de memória, tente novamente...\n");
+                exit(-1);
+            }
         }
     }
     
-    return maxfaces;
 }
 

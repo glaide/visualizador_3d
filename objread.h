@@ -11,7 +11,6 @@ GRR20184567
 #include <stdlib.h>
 #define tam 100
 #define step 100
-#define colvert 3
 #define colfaces 15
 
 //funcao para leitura do objeto
@@ -21,10 +20,10 @@ void leObj(FILE *obj, int argc, char**argv);
 void ignora_comentario(FILE *obj);
 
 //le os vertices e retorna o valor total
-int leVert(FILE *obj, float **vetor);
+void leVert(FILE *obj, float **vetor);
 
 //le o numero de faces e os indices dos vertices
-int leFaces(FILE *obj, int **faces);
+void leFaces(FILE *obj, int **faces);
 
 
 //corta a string para pegar apenas a primeira parte
