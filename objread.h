@@ -8,6 +8,8 @@ GRR20184567
 #ifndef objread
 #define objread
 #include <stdio.h>
+#include "datatypes.h"
+
 #include <stdlib.h>
 #define tam 100
 #define step 100
