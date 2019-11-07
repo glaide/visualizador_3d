@@ -20,7 +20,7 @@ void leObj(FILE *obj, int argc, char**argv);
 void ignora_comentario(FILE *obj);
 
 //le os vertices e retorna o valor total
-void leVert(FILE *obj, float **vetor);
+void leVert(FILE *obj, vert *vetor);
 
 //le o numero de faces e os indices dos vertices
 void leFaces(FILE *obj, int **faces);
