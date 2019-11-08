@@ -6,6 +6,11 @@
 #ifndef __DATATYPES__
 #define __DATATYPES__
 
+typedef struct convert
+{
+    float x,y;
+}convert;
+
 typedef struct vert
 {
     float x,y,z;

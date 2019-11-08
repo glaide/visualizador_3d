@@ -24,7 +24,6 @@ int main(int argc, char** argv)
     
     //le os valores do vertice e salva no vetor
     leVert(obj,vertice);
-
  
     //aloca um vetor que guardara os vertices de cada face
     int **faces=malloc(tam * sizeof(int*));
@@ -37,6 +36,17 @@ int main(int argc, char** argv)
     }
     //le o numero de vertices em cada face e salva seus indices 
     leFaces(obj,faces);
+
+    //aloca um novo espaço para a conversao 2d
+    convert *vertice=malloc(tam * sizeof(convert*));
+    if (!convert)
+    {
+        printf("Erro na alocação de memória, tente novamente...\n");
+        exit(-1);
+    }
+
+
+
 
     // returns zero on success else non-zero 
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)  

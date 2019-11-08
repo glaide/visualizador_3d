@@ -4,7 +4,9 @@
 #define graphics
 // funções de apresentação gráfica
 #include <SDL2/SDL.h> 
+#include "datatypes.h"
 #include <SDL2/SDL_image.h> 
 #include <SDL2/SDL_timer.h> 
+
 
 #endif
