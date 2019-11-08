@@ -27,8 +27,7 @@ void leVert(FILE *obj, vert *vetor)
 {
     char texto[tam];
     int nvert=0, nova=0;
-    vert *aux;
-
+   
     char *str=NULL;    
     //salva o conteudo do objeto num vetor de char para poder cortar
     while (fgets(texto,tam*sizeof(char),obj) != NULL)  
@@ -45,12 +44,11 @@ void leVert(FILE *obj, vert *vetor)
                 // corta um novo pedaço   
                 str=strtok(NULL, " ");
                 // salva no vetor já convertido para float
-                aux=vetor[nvert];
-                aux->x=atof(str);
+                vetor[nvert].x=atof(str);
                 str=strtok(NULL, " ");
-                vetor[nvert]->y=str;
+                vetor[nvert].y=atof(str);
                 str=strtok(NULL, " ");
-                vetor[nvert]->z=str;
+                vetor[nvert].z=atof(str);
                 //incrementa a variavel com a quantidade de vertices
                 nvert++;            
             }
@@ -69,7 +67,6 @@ void leVert(FILE *obj, vert *vetor)
         }
     }
    
-    return 0;
 }
 /*----------------RECEBE UMA STRING E CORTA O PRIMEIRO PEDAÇO----------------------*/
 //funcao para retornar apenas a primeira parte do valor de faces
@@ -101,6 +98,7 @@ void ignora_comentario(FILE *obj)
 void leFaces(FILE *obj, int **faces)
 {
     char texto[tam];
+    int nova;
     char *str=NULL;
     /*variavel usada para verificar qual é o 
     maior numero de vertices em uma face*/
@@ -136,7 +134,7 @@ void leFaces(FILE *obj, int **faces)
             nova=tam+step+nova;
             faces=realloc(faces, nova*colfaces*sizeof(int));
             //verifica se foi alocado corretamente
-            if(!vetor)
+            if(!faces)
             {
                 printf("Erro na alocação de memória, tente novamente...\n");
                 exit(-1);
