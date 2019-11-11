@@ -23,17 +23,18 @@ void leObj(FILE *obj, int argc, char** argv)
     }
 }
 /*----------------LE NUMERO DE VERTICES E SEUS VALORES----------------------*/
-void leVert(FILE *obj, vert *vetor)
+int leVert(FILE *obj, vert *vetor)
 {
     char texto[tam];
-    int nvert=0, nova=0;
+    int nvert=0;
+    int nova=tam;
    
     char *str=NULL;    
     //salva o conteudo do objeto num vetor de char para poder cortar
     while (fgets(texto,tam*sizeof(char),obj) != NULL)  
     {
         //verifica se o tamanho é suficiente para continuar a leitura
-        if (nvert<tam)
+        if (nvert<nova)
         {
              /*verifica o primeiro e segundo espaço do vetor, pois pode haver um 
             v junto de outras palavras, de forma que não seja o conteudo procurado*/
@@ -53,10 +54,10 @@ void leVert(FILE *obj, vert *vetor)
                 nvert++;            
             }
         }
-        else if (nvert == tam) 
+        else if (nvert == nova) 
         {
             //atualizo um novo tamanho com a soma de + 100
-            nova=tam+step+nova;
+            nova=nova+step;
             vetor=realloc(vetor, nova*sizeof(vert*));
             //verifica se foi alocado corretamente
             if(!vetor)
@@ -66,7 +67,7 @@ void leVert(FILE *obj, vert *vetor)
             }
         }
     }
-   
+   return nova;
 }
 /*----------------RECEBE UMA STRING E CORTA O PRIMEIRO PEDAÇO----------------------*/
 //funcao para retornar apenas a primeira parte do valor de faces

@@ -9,6 +9,7 @@
 int main(int argc, char** argv)
 {
     FILE *obj;
+    int tamvert;
 
     //le o arquivo e verifica se foi aberto corretamente
     leObj(obj,argc, argv);
@@ -23,7 +24,7 @@ int main(int argc, char** argv)
     }
     
     //le os valores do vertice e salva no vetor
-    leVert(obj,vertice);
+    tamvert=leVert(obj,vertice);
  
     //aloca um vetor que guardara os vertices de cada face
     int **faces=malloc(tam * sizeof(int*));
@@ -38,13 +39,15 @@ int main(int argc, char** argv)
     leFaces(obj,faces);
 
     //aloca um novo espaço para a conversao 2d
-    convert *vertice=malloc(tam * sizeof(convert*));
-    if (!convert)
+    convert *novovert=malloc(tam * sizeof(convert*));
+    if (!novovert)
     {
         printf("Erro na alocação de memória, tente novamente...\n");
         exit(-1);
     }
 
+    // funcao que calcula os novos pontos com a perspectiva fraca
+    persp(novovert, vertice,obj,tamvert);
 
 
 
