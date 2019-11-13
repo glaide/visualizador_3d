@@ -47,7 +47,7 @@ int main(int argc, char** argv)
     }
 
     // funcao que calcula os novos pontos com a perspectiva fraca
-    persp(novovert, vertice,obj,tamvert);
+    conv2d(novovert, vertice,obj,tamvert);
 
 
 
