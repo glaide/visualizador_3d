@@ -10,8 +10,6 @@ void conv2d(convert *doisD, vert *vet, FILE *obj, int tamV)
     xp = xc + zc × ( (xv - xc) ÷ (zv + zc) )
     yp = yc + zc × ( (yv - yc) ÷ (zv + zc) )
     */
-
-//    vai ate o tamanho do vetor de vertices
         
     //verificar esses valores
     float xc=0;
@@ -29,8 +27,7 @@ void conv2d(convert *doisD, vert *vet, FILE *obj, int tamV)
 
 void conv_coord(convert *doisD, int tamV)
 {
-    int W=800,H=600;
-    float x_min, x_max, y_min,y_max, x_cent, y_cent, x_dif, y_dif;
+    float x_min, x_max, y_min,y_max, x_cent, y_cent, x_dif, y_dif,x_esc, y_esc, escala;   
 
     // seta os primeiros valores para depois comparar
     x_min = x_max = doisD[0].x;
@@ -47,11 +44,27 @@ void conv_coord(convert *doisD, int tamV)
     }
 
     // seta os valores do centro
-    x_cent = (x_max + x_min) /2;
-    y_cent = (y_max + y_min) /2;
+    x_cent = (x_max + x_min) /2.0;
+    y_cent = (y_max + y_min) /2.0;
 
     // seta os valores de diferença
-    x_dif=x_max-x_min;
-    y_dif=y_max-y_min;
+    x_dif=x_max - x_min;
+    y_dif=y_max - y_min;
+
+    //seta os valores para escala
+    x_esc= W/x_dif;
+    y_esc=H/y_dif;
+
+    //calcula o valor para a escala
+    escala=menor(x_esc,y_esc);
+
+    //faz os calculos dos valores para plotagem
+    for (int i=0; i < tamV; i++)
+    {
+        float aux=((doisD[i].x - x_cent)*escala) + W/2;
+        doisD[i].x=aux;
+        aux=((doisD[i].y - y_cent)*escala) + H/2;
+        doisD[i].y=aux;
+    }
 
 }

@@ -49,8 +49,7 @@ int main(int argc, char** argv)
     // funcao que calcula os novos pontos com a perspectiva fraca
     conv2d(novovert, vertice,obj,tamvert);
 
-
-
+  
     // returns zero on success else non-zero 
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)  
         printf("error initializing SDL: %s\n", SDL_GetError()); 
