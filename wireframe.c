@@ -10,7 +10,7 @@ int main(int argc, char** argv)
 {
     FILE *obj;
     int tamvert;
-    SDL_Window *win;
+    SDL_Window **win;
     SDL_Renderer *rend;
     SDL_Event evento;
 
@@ -54,7 +54,7 @@ int main(int argc, char** argv)
 
 
     //inicio da parte da biblioteca
-    if (SDL_Init(SDL_INIT_EVENT) < 0)
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
         SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Não foi possível iniciar SDL: %s", SDL_GetError());
         exit(-1);
