@@ -10,6 +10,9 @@ int main(int argc, char** argv)
 {
     FILE *obj;
     int tamvert;
+    SDL_Window *win;
+    SDL_Renderer *rend;
+    SDL_Event evento;
 
     //le o arquivo e verifica se foi aberto corretamente
     leObj(obj,argc, argv);
@@ -49,16 +52,25 @@ int main(int argc, char** argv)
     // funcao que calcula os novos pontos com a perspectiva fraca
     conv2d(novovert, vertice,obj,tamvert);
 
-  
-    // returns zero on success else non-zero 
-    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)  
-        printf("error initializing SDL: %s\n", SDL_GetError()); 
-    SDL_Window* win = SDL_CreateWindow("Visualizador 3D",SDL_WINDOWPOS_CENTERED,SDL_WINDOWPOS_CENTERED, 800, 600, 0); 
-    while (1); 
 
-    SDL_Delay(36);
- 
-    SDL_DestroyWindow(win);
-    SDL_Quit();
+    //inicio da parte da biblioteca
+    if (SDL_Init(SDL_INIT_EVENT) < 0)
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Não foi possível iniciar SDL: %s", SDL_GetError());
+        exit(-1);
+    }
+    //cria janela de renderização
+    if (SDL_CreateWindowAndRenderer(W,H, 0, win,rend)) 
+    {
+        SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Não foi possível criar a janela: %s", SDL_GetError());
+        exit(-1);
+    }
+
+    //define as cores usadas para o desenho
+   	SDL_SetRenderDrawColor(rend, 0x00, 0x00, 0x00, 0x00);
+	//limpa a tela de renderização
+    SDL_RenderClear(rend);
+   
+  
 
 }
