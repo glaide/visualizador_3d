@@ -62,8 +62,7 @@ int leVert(FILE *obj, vert *vetor)
             
         }
     }
-    if (fgets(texto,tam,obj)== NULL)
-    nova=0;
+    
    return nova;
 }
 /*----------------RECEBE UMA STRING E CORTA O PRIMEIRO PEDAÇO----------------------*/
