@@ -7,23 +7,7 @@ GRR20184567
 #include "datatypes.h"
 #include <string.h>
 // funções de leitura do arquivo OBJ
-//funcao que abre o objeto e verifica se foi aberto corretamente
-void leObj(FILE *obj, int argc, char** argv)
-{
-    //verifica qual tipo de abertura do arquivo será feita
-    if (argc == 1)
-        obj=stdin;
-    else
-        obj=fopen(argv[1],"r+");
-    
-    printf("%s aaaaaaaaa \n",argv[1]);
-    
-    if (obj == NULL)
-    {
-        printf("Erro ao ler o arquivo, tente novamente...");
-        exit(-1);
-    }
-}
+
 /*----------------LE NUMERO DE VERTICES E SEUS VALORES----------------------*/
 int leVert(FILE *obj, vert *vetor)
 {
@@ -32,7 +16,11 @@ int leVert(FILE *obj, vert *vetor)
     int nova=tam;
    
     char *str=NULL;   
-
+    if (obj == NULL)
+    {
+        printf("Erro ao ler o arquivo, tente novamente...");
+        exit(-1);
+    }  
     //salva o conteudo do objeto num vetor de char para poder cortar
     while (fgets(texto,tam,obj) != NULL)  
     {

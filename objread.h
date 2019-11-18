@@ -15,9 +15,6 @@ GRR20184567
 #define step 100
 #define colfaces 15
 
-//funcao para leitura do objeto
-void leObj(FILE *obj, int argc, char**argv);
-
 //função que ignora comentarios
 void ignora_comentario(FILE *obj);
 
