@@ -14,9 +14,11 @@ void leObj(FILE *obj, int argc, char** argv)
     if (argc == 1)
         obj=stdin;
     else
-        obj=fopen(argv[1],"r");
+        obj=fopen(argv[1],"r+");
     
-    if (!obj)
+    printf("%s aaaaaaaaa \n",argv[1]);
+    
+    if (obj == NULL)
     {
         printf("Erro ao ler o arquivo, tente novamente...");
         exit(-1);
@@ -29,9 +31,10 @@ int leVert(FILE *obj, vert *vetor)
     int nvert=0;
     int nova=tam;
    
-    char *str=NULL;    
+    char *str=NULL;   
+
     //salva o conteudo do objeto num vetor de char para poder cortar
-    while (fgets(texto,tam*sizeof(char),obj) != NULL)  
+    while (fgets(texto,tam,obj) != NULL)  
     {
         //verifica se o tamanho é suficiente para continuar a leitura
         if (nvert<nova)
@@ -50,9 +53,11 @@ int leVert(FILE *obj, vert *vetor)
                 vetor[nvert].y=atof(str);
                 str=strtok(NULL, " ");
                 vetor[nvert].z=atof(str);
+                // fscanf("%i %i %i", &vetor[nvert].x &vetor[nvert].y &vetor[nvert].z );
                 //incrementa a variavel com a quantidade de vertices
                 nvert++;            
             }
+            fgets(texto,tam*sizeof(char),obj);
         }
         else if (nvert == nova) 
         {
@@ -65,8 +70,12 @@ int leVert(FILE *obj, vert *vetor)
                 printf("Erro na alocação de memória, tente novamente...\n");
                 exit(-1);
             }
+            fgets(texto,tam*sizeof(char),obj);
+            
         }
     }
+    if (fgets(texto,tam,obj)== NULL)
+    nova=0;
    return nova;
 }
 /*----------------RECEBE UMA STRING E CORTA O PRIMEIRO PEDAÇO----------------------*/
@@ -79,22 +88,7 @@ char *corte(char *str)
     return aux;
 }
 
-/*----------------IGNORA OS COMENTARIOS DO ARQUIVO----------------------*/
-void ignora_comentario(FILE *obj)
-{
-    char lixo;
-    lixo=fgetc(obj); //pega um caracter do arquivo
-    do
-    {
-        if (lixo== '#') //verifica se é um comentario
-            while (lixo != '\n')
-                lixo=fgetc(obj); //enquanto n chegar no fim da linha, continua lendp
-        else
-            ungetc(lixo,obj); //devolve o caracter pro arquivo
-        lixo=fgetc(obj); //le o proximo caracter
-    }   while (lixo=='#');
-    ungetc(lixo,obj);
-}
+
 /*----------------LE NUMERO DE FACES E SEUS VALORES----------------------*/
 void leFaces(FILE *obj, int **faces)
 {
@@ -127,6 +121,8 @@ void leFaces(FILE *obj, int **faces)
                     }
                 maxfaces++;
             }
+            fgets(texto,tam*sizeof(char),obj);
+
         }
         //caso seja necessario fazer uma nova alocaçao
         else if (tam == maxfaces)
@@ -140,6 +136,8 @@ void leFaces(FILE *obj, int **faces)
                 printf("Erro na alocação de memória, tente novamente...\n");
                 exit(-1);
             }
+                fgets(texto,tam*sizeof(char),obj);
+
         }
     }
     

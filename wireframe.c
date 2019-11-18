@@ -8,11 +8,12 @@
 
 int main(int argc, char** argv)
 {
-    FILE *obj;
+    FILE *obj=NULL;
     int tamvert;
     SDL_Window **win;
     SDL_Renderer *rend;
     SDL_Event evento;
+
 
     //le o arquivo e verifica se foi aberto corretamente
     leObj(obj,argc, argv);
@@ -20,7 +21,7 @@ int main(int argc, char** argv)
     //aloca um vetor para os vertices
     vert *vertice=malloc(tam * sizeof(vert*));
     //verifica se foi alocado corretamente
-    if (!vertice)
+    if (vertice == NULL)
     {
         printf("Erro na alocação de memória, tente novamente...\n");
         exit(-1);
@@ -33,7 +34,7 @@ int main(int argc, char** argv)
     int **faces=malloc(tam * sizeof(int*));
     for (int i=0; i<tam; i++)
         faces[i]=malloc(colfaces*sizeof(int));
-    if (!faces)
+    if (faces == NULL)
     {
         printf("Erro na alocação de memória, tente novamente...\n");
         exit(-1);
@@ -43,7 +44,7 @@ int main(int argc, char** argv)
 
     //aloca um novo espaço para a conversao 2d
     convert *novovert=malloc(tam * sizeof(convert*));
-    if (!novovert)
+    if (novovert == NULL)
     {
         printf("Erro na alocação de memória, tente novamente...\n");
         exit(-1);
