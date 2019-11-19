@@ -4,23 +4,14 @@
 
 // funções de cálculo de perspectiva
 
-void conv2d(convert *doisD, vert *vet, FILE *obj, int tamV)
+void conv2d(convert *doisD, vert *vet, FILE *obj, int tamV, vert cam)
 {
-    /*
-    xp = xc + zc × ( (xv - xc) ÷ (zv + zc) )
-    yp = yc + zc × ( (yv - yc) ÷ (zv + zc) )
-    */
-        
-    //verificar esses valores
-    float xc=0;
-    float yc=0;
-    float zc=100;
-
+    
     for (int i=0; i < tamV; i++)
     {
         // calcula a conversao para x e y em 2d
-        doisD[i].x= xc + zc *( (vet[i].x - xc) / (vet[i].z + zc) );
-        doisD[i].y= yc + zc *( (vet[i].y - yc) / (vet[i].z + zc) );
+        doisD[i].x= cam.x + cam.z *( (vet[i].x - cam.x) / (vet[i].z + cam.z) );
+        doisD[i].y= cam.y + cam.z *( (vet[i].y - yc) / (vet[i].z + cam.z) );
     }
    
 }
@@ -65,6 +56,24 @@ void conv_coord(convert *doisD, int tamV)
         doisD[i].x=aux;
         aux=((doisD[i].y - y_cent)*escala) + H/2;
         doisD[i].y=aux;
+    }
+
+}
+
+void maiores(vert camera, vert *tresd, int tamv)
+{
+    camera = {
+        .x=0; 
+        .y=0; 
+        .z=0;
+    }
+
+    for (int i=0; i < tamv; i++)
+    {
+        if (tresd[i].x > camera.x) camera.x = tresd[i].x;
+        if (tresd[i].y > camera.y) camera.y = tresd[i].y;
+        if (tresd[i].z > camera.z) camera.z = tresd[i].z;
+
     }
 
 }

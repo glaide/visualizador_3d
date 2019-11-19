@@ -12,7 +12,8 @@ int main(int argc, char** argv)
     int tamvert;
     SDL_Window *win;
     SDL_Renderer *renderer;
-    // SDL_Event evento;
+    SDL_Event evento;
+    vert camera;
 
 
     //le o arquivo e verifica se foi aberto corretamente
@@ -53,7 +54,6 @@ int main(int argc, char** argv)
     }
     //le o numero de vertices em cada face e salva seus indices 
     leFaces(obj,faces);
-    printf("ok \n\n\n");
 
     //aloca um novo espaço para a conversao 2d
     convert *novovert=malloc(tam * sizeof(convert*));
@@ -63,8 +63,11 @@ int main(int argc, char** argv)
         exit(-1);
     }
 
+    // seta os valores iniciais para a camera que futuramente srao alterados
+    maiores(camera, vertice, tamvert);
+
     // funcao que calcula os novos pontos com a perspectiva fraca
-    conv2d(novovert, vertice,obj,tamvert);
+    conv2d(novovert, vertice,obj,tamvert, camera);
 
 
     //inicio da parte da biblioteca
@@ -84,5 +87,42 @@ int main(int argc, char** argv)
    	SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
 	//limpa a tela de renderização
     SDL_RenderClear(renderer);
+
+    while (1) 
+    {
+        while (SDL_PollEvent(&evento)) 
+        {
+            // fecha a janela
+            if (evento.type == SDL_QUIT) break;
+
+            // caos alguma tecla seja apertada
+            if(evento.type == SDL_KEYDOWN)
+            {
+                switch (evento.key.keysym.sym)
+                {
+                case SDLK_ESCAPE:
+                    
+                    break;
+                
+                case SDLK_UP:
+                    break;
+
+                case SDLK_DOWN:
+                    break;
+
+                case SDLK_LEFT:
+                    break;
+                
+                case SDLK_RIGHT:
+                    break;
+                
+                default:
+                    break;
+                }
+            }
+        }
+    }
+    /* do some other stuff here -- draw your app, etc. */
+}
    
 }

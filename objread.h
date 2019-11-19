@@ -29,4 +29,6 @@ void leFaces(FILE *obj, int **faces);
 //corta a string para pegar apenas a primeira parte
 char *corte(char *str);
 
+
+
 #endif
