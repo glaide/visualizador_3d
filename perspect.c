@@ -62,11 +62,11 @@ void conv_coord(convert *doisD, int tamV)
 
 void maiores(vert camera, vert *tresd, int tamv)
 {
-    camera = {
-        .x=0; 
-        .y=0; 
-        .z=0;
-    }
+    camera.x=0;
+    camera.y=0;
+    camera.z=0;
+
+    
 
     for (int i=0; i < tamv; i++)
     {
