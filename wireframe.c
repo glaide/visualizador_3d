@@ -90,36 +90,35 @@ int main(int argc, char** argv)
     //    while (SDL_PollEvent(&evento)) 
     //    {
             // fecha a janela
-            if (evento.type == SDL_QUIT) break;
+//            if (evento.type == SDL_QUIT) break;
 
             // caos alguma tecla seja apertada
-            if(evento.type == SDL_KEYDOWN)
-            {
-                switch (evento.key.keysym.sym)
-                {
-                case SDLK_ESCAPE:
-                    
-                    break;
+  //          if(evento.type == SDL_KEYDOWN)
+    //        {
+      //          switch (evento.key.keysym.sym)
+        //        {
+          //      case SDLK_ESCAPE:
+            //        
+              //      break;
                 
-                case SDLK_UP:
-                    break;
+             //   case SDLK_UP:
+               //     break;
 
-                case SDLK_DOWN:
-                    break;
+//                case SDLK_DOWN:
+  //                  break;
 
-                case SDLK_LEFT:
-                    break;
+//                case SDLK_LEFT:
+  //                  break;            
+//                case SDLK_RIGHT:
+  //                  break;
                 
-                case SDLK_RIGHT:
-                    break;
-                
-                default:
-                    break;
-                }
-            }
+    //            default:
+      //              break;
+        //        }
+          //  }
     //    }
     //}
     /* do some other stuff here -- draw your app, etc. */
-}
+//}
    
 }

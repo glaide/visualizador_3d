@@ -11,7 +11,7 @@ void conv2d(convert *doisD, vert *vet, FILE *obj, int tamV, vert cam)
     {
         // calcula a conversao para x e y em 2d
         doisD[i].x= cam.x + cam.z *( (vet[i].x - cam.x) / (vet[i].z + cam.z) );
-        doisD[i].y= cam.y + cam.z *( (vet[i].y - yc) / (vet[i].z + cam.z) );
+        doisD[i].y= cam.y + cam.z *( (vet[i].y - cam.y) / (vet[i].z + cam.z) );
     }
    
 }

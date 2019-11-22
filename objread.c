@@ -98,15 +98,15 @@ void leFaces(FILE *obj, f *faces)
                 str=strtok(texto, " ");
                 for (int i=0; i<colfaces; i++)
                 {
-                    faces.tamf=0;
+                    faces->tamf=0;
                     //laço para garantir que não ira pegar nenhum valor que seja 'f '
                     if (texto[0] != 'f' && texto[1] != ' ')
                     {
                         str=strtok(NULL, " ");
                         //pega apenas o primeiro pedaço antes do /
                         str=corte(str);
-                        faces.v[i]=atoi(str);
-                        faces.tamf++;
+                        faces->v[i]=atoi(str);
+                        faces->tamf++;
                         //incrementa a variavel com a quantidade de vertices                    
                     }
                 }
