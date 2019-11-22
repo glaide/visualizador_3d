@@ -19,10 +19,8 @@ int main(int argc, char** argv)
     //le o arquivo e verifica se foi aberto corretamente
     // leObj(obj,argc, argv);
 
-    if (argc == 1)
-        obj=stdin;
-    else
-        obj=fopen(argv[1],"r");
+    if (argc == 1) obj=stdin;
+    else obj=fopen(argv[1],"r");
     
     if (obj == NULL)
     {
@@ -87,10 +85,10 @@ int main(int argc, char** argv)
 	//limpa a tela de renderização
     SDL_RenderClear(renderer);
 
-    while (1) 
-    {
-        while (SDL_PollEvent(&evento)) 
-        {
+    //while (1) 
+    //{
+    //    while (SDL_PollEvent(&evento)) 
+    //    {
             // fecha a janela
             if (evento.type == SDL_QUIT) break;
 
@@ -119,8 +117,8 @@ int main(int argc, char** argv)
                     break;
                 }
             }
-        }
-    }
+    //    }
+    //}
     /* do some other stuff here -- draw your app, etc. */
 }
    

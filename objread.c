@@ -71,6 +71,7 @@ char *corte(char *str)
     //ira dividir a palavra por / e retornar apenas a primeira parte
     char *aux=NULL;  
     aux=strtok(str, "/");
+    strtok(NULL, " ");
     return aux;
 }
 
@@ -79,7 +80,7 @@ char *corte(char *str)
 void leFaces(FILE *obj, f *faces)
 {
     char texto[tam];
-    int nova;
+    int nova=tam;
     char *str=NULL;
     /*variavel usada para verificar qual é o 
     maior numero de vertices em uma face*/
@@ -88,7 +89,7 @@ void leFaces(FILE *obj, f *faces)
     while (fgets(texto,tam*sizeof(char),obj) != NULL)
     {
         //caso o tamanho alocado seja necessario
-        if (tam > maxfaces)
+        if (nova > maxfaces)
         {
             /*verifica o primeiro e segundo espaço do vetor, pois pode haver um 
             f junto de outras palavras, de forma que não seja o conteudo procurado*/
@@ -97,7 +98,7 @@ void leFaces(FILE *obj, f *faces)
                 str=strtok(texto, " ");
                 for (int i=0; i<colfaces; i++)
                 {
-                faces.tamf=0;
+                    faces.tamf=0;
                     //laço para garantir que não ira pegar nenhum valor que seja 'f '
                     if (texto[0] != 'f' && texto[1] != ' ')
                     {
@@ -115,10 +116,10 @@ void leFaces(FILE *obj, f *faces)
 
         }
         //caso seja necessario fazer uma nova alocaçao
-        else if (tam == maxfaces)
+        else if (nova == maxfaces)
         {
             //atualizo um novo tamanho com a soma de + 100
-            nova=tam+step+nova;
+            nova=step+nova;
             faces=realloc(faces, nova*sizeof(f));
             //verifica se foi alocado corretamente
             if(!faces)
@@ -126,7 +127,7 @@ void leFaces(FILE *obj, f *faces)
                 printf("Erro na alocação de memória, tente novamente...\n");
                 exit(-1);
             }
-                fgets(texto,tam*sizeof(char),obj);
+            fgets(texto,tam*sizeof(char),obj);
 
         }
     }
