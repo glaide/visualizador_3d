@@ -77,7 +77,7 @@ char *corte(char *str)
 
 
 /*----------------LE NUMERO DE FACES E SEUS VALORES----------------------*/
-void leFaces(FILE *obj, int **faces)
+void leFaces(FILE *obj, f *faces)
 {
     char texto[tam];
     int nova;
@@ -97,13 +97,15 @@ void leFaces(FILE *obj, int **faces)
             {
                 str=strtok(texto, " ");
                 for (int i=0; i<colfaces; i++)
+                faces.tamf=0;
                     //laço para garantir que não ira pegar nenhum valor que seja 'f '
                     if (texto[0] != 'f' && texto[1] != ' ')
                     {
                         str=strtok(NULL, " ");
                         //pega apenas o primeiro pedaço antes do /
                         str=corte(str);
-                        faces[maxfaces][i]=atoi(str);
+                        faces.v[i]=atoi(str);
+                        faces.tamf++;
                         //incrementa a variavel com a quantidade de vertices                    
                     }
                 maxfaces++;
@@ -116,7 +118,7 @@ void leFaces(FILE *obj, int **faces)
         {
             //atualizo um novo tamanho com a soma de + 100
             nova=tam+step+nova;
-            faces=realloc(faces, nova*colfaces*sizeof(int));
+            faces=realloc(faces, nova*sizeof(f));
             //verifica se foi alocado corretamente
             if(!faces)
             {

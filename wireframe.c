@@ -44,9 +44,8 @@ int main(int argc, char** argv)
 
  
     //aloca um vetor que guardara os vertices de cada face
-    int **faces=malloc(tam * sizeof(int*));
-    for (int i=0; i<tam; i++)
-        faces[i]=malloc(colfaces*sizeof(int));
+    f *faces=malloc(tam * sizeof(f));
+    
     if (faces == NULL)
     {
         printf("Erro na alocação de memória, tente novamente...\n");

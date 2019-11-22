@@ -5,7 +5,7 @@
 
 #ifndef __DATATYPES__
 #define __DATATYPES__
-
+#define colfaces 15
 typedef struct convert
 {
     float x,y;
@@ -16,5 +16,10 @@ typedef struct vert
     float x,y,z;
 }vert;
 
+typedef struct f
+{
+    int v[colfaces];
+    int tamf;
+}f;
 
 #endif

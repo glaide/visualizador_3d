@@ -23,7 +23,7 @@ int leVert(FILE *obj, vert *vetor);
 
 
 //le o numero de faces e os indices dos vertices
-void leFaces(FILE *obj, int **faces);
+void leFaces(FILE *obj, f *faces);
 
 
 //corta a string para pegar apenas a primeira parte
