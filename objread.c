@@ -77,7 +77,7 @@ char *corte(char *str)
 
 
 /*----------------LE NUMERO DE FACES E SEUS VALORES----------------------*/
-void leFaces(FILE *obj, f *faces)
+int leFaces(FILE *obj, f *faces)
 {
     char texto[tam];
     int nova=tam;
@@ -131,6 +131,6 @@ void leFaces(FILE *obj, f *faces)
 
         }
     }
-    
+   return maxfaces; 
 }
 

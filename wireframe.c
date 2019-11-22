@@ -9,7 +9,7 @@
 int main(int argc, char** argv)
 {
     FILE *obj=NULL;
-    int tamvert;
+    int tamvert, tamfaces;
     SDL_Window *win;
     SDL_Renderer *renderer;
     SDL_Event evento;
@@ -50,7 +50,7 @@ int main(int argc, char** argv)
         exit(-1);
     }
     //le o numero de vertices em cada face e salva seus indices 
-    leFaces(obj,faces);
+    tamfaces= leFaces(obj,faces);
 
     //aloca um novo espaço para a conversao 2d
     convert *novovert=malloc(tam * sizeof(convert*));
