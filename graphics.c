@@ -13,4 +13,5 @@ void imprime_objeto(SDL_Renderer *renderer, convert *doisD, f *faces, int tamf, 
     //desenha os pontos na tela
     //vericar como apagar as linhas repetidas
 
+    
 }
