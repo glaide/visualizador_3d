@@ -19,9 +19,7 @@ void imprime_objeto(SDL_Renderer *renderer, convert *doisD, f *faces, int tamf, 
         {
             SDL_RenderDrawLine(
                renderer,(int)doisD[]x, 
-               (int)doisD[].y,
-               
-                           );
+               (int)doisD[].y,);
         }
     }
 }
