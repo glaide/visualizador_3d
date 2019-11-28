@@ -14,57 +14,57 @@ int main(int argc, char** argv)
     SDL_Renderer *renderer;
     SDL_Event evento;
     vert camera;
+    int desenha = T;
+    int sai = F;
 
 
-    //le o arquivo e verifica se foi aberto corretamente
-    // leObj(obj,argc, argv);
-
+  //le o arquivo e verifica se foi aberto corretamente
+  // leObj(obj,argc, argv);
     if (argc == 1) obj=stdin;
     else obj=fopen(argv[1],"r");
     
     if (obj == NULL)
     {
-        printf("Erro ao ler o arquivo, tente novamente...");
-        exit(-1);
+    printf("Erro ao ler o arquivo, tente novamente...");
+    exit(-1);
     } 
-    
-    //aloca um vetor para os vertices
-    vert *vertice=malloc(tam * sizeof(vert*));
-    //verifica se foi alocado corretamente
+  
+  //aloca um vetor para os vertices
+     vert *vertice=malloc(tam * sizeof(vert*));
+  //verifica se foi alocado corretamente
     if (vertice == NULL)
     {
-        printf("Erro na alocação de memória, tente novamente...\n");
-        exit(-1);
+    printf("Erro na alocação de memória, tente novamente...\n");
+    exit(-1);
     }
 
-    //le os valores do vertice e salva no vetor
+  //le os valores do vertice e salva no vetor
     tamvert=leVert(obj,vertice);
 
  
-    //aloca um vetor que guardara os vertices de cada face
-    f *faces=malloc(tam * sizeof(f));
-    
+  //aloca um vetor que guardara os vertices de cada face
+    f *faces=malloc(tam * sizeof(f));  
     if (faces == NULL)
     {
-        printf("Erro na alocação de memória, tente novamente...\n");
-        exit(-1);
+    printf("Erro na alocação de memória, tente novamente...\n");
+    exit(-1);
     }
-    //le o numero de vertices em cada face e salva seus indices 
-    tamfaces= leFaces(obj,faces);
+  //le o numero de vertices em cada face e salva seus indices 
+     tamfaces= leFaces(obj,faces);
 
-    //aloca um novo espaço para a conversao 2d
+  //aloca um novo espaço para a conversao 2d
     convert *novovert=malloc(tam * sizeof(convert*));
     if (novovert == NULL)
     {
-        printf("Erro na alocação de memória, tente novamente...\n");
-        exit(-1);
+    printf("Erro na alocação de memória, tente novamente...\n");
+    exit(-1);
     }
 
-    // seta os valores iniciais para a camera que futuramente srao alterados
+
+  
+  // seta os valores iniciais para a camera que futuramente srao alterados
     maiores(camera, vertice, tamvert);
 
-    // funcao que calcula os novos pontos com a perspectiva fraca
-    conv2d(novovert, vertice,obj,tamvert, camera);
 
 
     //inicio da parte da biblioteca
@@ -81,44 +81,75 @@ int main(int argc, char** argv)
     }
 
     //define as cores usadas para o desenho
-   	SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
-	//limpa a tela de renderização
+ 	SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
+    //limpa a tela de renderização
     SDL_RenderClear(renderer);
 
-    //while (1) 
-    //{
-    //    while (SDL_PollEvent(&evento)) 
-    //    {
-            // fecha a janela
-//            if (evento.type == SDL_QUIT) break;
+    while (!sai)
+    {
+        // acha o evento na fila
+        SDL_PollEvent(&evento);
+        // caso aperte o botao para fechar
+        if (evento.type == SDL_QUIT) break;
+        // para receber as teclas pressionadas
+        if(evento.type == SDL_KEYDOWN)
+        {
+	        switch(evento.key.keysym.sym)
+            {
+                case SDLK_ESCAPE:
+	        		sai= T;
+	        		break;
 
-            // caos alguma tecla seja apertada
-  //          if(evento.type == SDL_KEYDOWN)
-    //        {
-      //          switch (evento.key.keysym.sym)
-        //        {
-          //      case SDLK_ESCAPE:
-            //        
-              //      break;
+                // neste caso acrescenta a variavel para mexer a camera
+                case SDLK_DOWN:
+		        	camera.y --;
+		        	desenha= T;
+					break;
+                //mesmo caso                 
+                case SDLK_UP:
+		        	camera.y ++;
+		        	desenha= T;
+					break;
                 
-             //   case SDLK_UP:
-               //     break;
-
-//                case SDLK_DOWN:
-  //                  break;
-
-//                case SDLK_LEFT:
-  //                  break;            
-//                case SDLK_RIGHT:
-  //                  break;
+                //ajusta os valores para o x
+                case SDLK_LEFT:
+		        	camera.x ++;
+		        	desenha= T;
+					break;
                 
-    //            default:
-      //              break;
-        //        }
-          //  }
-    //    }
-    //}
-    /* do some other stuff here -- draw your app, etc. */
-//}
-   
+                //mesmo caso para o outro lado
+                case SDLK_RIGHT:
+		        	camera.x --;
+		        	desenha= T;
+					break;
+
+                default: break;
+            }
+        }
+
+        //caso as teclas sejam para fazer algo na visualização
+        if(desenha)
+        {
+	        SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
+    	    SDL_RenderClear(renderer);
+            // funcao que calcula os novos pontos com a perspectiva fraca            
+            conv2d(novovert, vertice,obj,tamvert, camera);
+            // todos os calculos para converter as coordenadas
+            conv_coord(novovert,tamvert);
+            //chama a funcao que ira imprimir o objeto
+            imprime_objeto(renderer,novovert,faces,tamfaces,tamvert);
+
+    	    SDL_RenderPresent(renderer);
+
+            desenha=F;
+        }
+    }
+    
+
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(win);
+
+    SDL_Quit();
+
+   return 0;
 }

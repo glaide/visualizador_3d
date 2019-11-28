@@ -15,15 +15,31 @@ void imprime_objeto(SDL_Renderer *renderer, convert *doisD, f *faces, int tamf, 
 
     for (int j=0; j>tamf; j++)
     {
-        for (int k=0; k< faces[i].tamf; k++)
+        for (int k=0; k< faces[j].tamf; k++)
         {
-            SDL_RenderDrawLine(
-               renderer,(int)doisD[]x, 
-               (int)doisD[].y,);
+
+            if(faces[j].v[k] == tamf)
+            {
+            // caso seja o ultimo vertice
+                SDL_RenderDrawLine(renderer,
+                (int)doisD[faces[j].v[k]].x, 
+                (int)doisD[faces[j].v[k]].y, 
+                (int)doisD[faces[j].v[0]].x, 
+                (int)doisD[faces[j].v[0]].y);
+            }
+            else
+            {
+                SDL_RenderDrawLine(renderer,
+                (int)doisD[faces[j].v[k]].x, 
+                (int)doisD[faces[j].v[k]].y,
+                (int)doisD[faces[j].v[k]+1].x,
+                (int)doisD[faces[j].v[k]+1].y);
+            }
+            
         }
     }
 }
 
 
 
-
+//diz qual o indice 
