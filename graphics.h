@@ -8,5 +8,8 @@
 #include <SDL2/SDL_image.h> 
 #include <SDL2/SDL_timer.h> 
 
+// funcao que gera as linhas
+void imprime_objeto(SDL_Renderer *renderer, convert *doisD, f *faces, int tamf, int tamv);
+
 
 #endif
