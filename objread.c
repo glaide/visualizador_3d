@@ -26,7 +26,7 @@ int leVert(FILE *obj, vert *vetor)
     {
         if (texto[0] == 'f')
         {
-            fseek ( obj, -strlen(texto) , SEEK_CUR );
+            fseek(obj, -strlen(texto), SEEK_CUR);
             break;
         }
 
@@ -68,7 +68,6 @@ int leVert(FILE *obj, vert *vetor)
         }
     }
 
-
     return nvert;
 }
 /*----------------RECEBE UMA STRING E CORTA O PRIMEIRO PEDAÇO----------------------*/
@@ -92,7 +91,7 @@ int leFaces(FILE *obj, f *faces)
     maior numero de vertices em uma face*/
     int maxfaces = 0;
 
-    while (fgets(texto, tam * sizeof(char), obj) != NULL)
+    while (fgets(texto, tam, obj) != NULL)
     {
         //caso o tamanho alocado seja necessario
         if (nova > maxfaces)
@@ -102,23 +101,21 @@ int leFaces(FILE *obj, f *faces)
             if (texto[0] == 'f' && texto[1] == ' ')
             {
                 str = strtok(texto, " ");
-                for (int i = 0; i < colfaces; i++)
+                faces[maxfaces].tamf = 0;
+                int i=0;
+                // verifica se tem uma string em str
+                while( (str = strtok(NULL, " ")) != NULL)
                 {
-                    faces->tamf = 0;
-                    //laço para garantir que não ira pegar nenhum valor que seja 'f '
-                    if (texto[0] != 'f' && texto[1] != ' ')
-                    {
-                        str = strtok(NULL, " ");
-                        //pega apenas o primeiro pedaço antes do /
-                        str = corte(str);
-                        faces->v[i] = atoi(str);
-                        faces->tamf++;
-                        //incrementa a variavel com a quantidade de vertices
-                    }
+                    // if (str[0]=='\n') break;
+                    //pega apenas o primeiro pedaço antes do /
+                    // str = corte(str);
+                    faces[maxfaces].v[i] = atoi(str);
+                    faces[maxfaces].tamf++;
+                    //incrementa a variavel com a quantidade de vertices
+                    i++;
                 }
                 maxfaces++;
             }
-            fgets(texto, tam * sizeof(char), obj);
         }
         //caso seja necessario fazer uma nova alocaçao
         else if (nova == maxfaces)
@@ -132,7 +129,6 @@ int leFaces(FILE *obj, f *faces)
                 printf("Erro na alocação de memória, tente novamente...\n");
                 exit(-1);
             }
-            fgets(texto, tam * sizeof(char), obj);
         }
     }
     return maxfaces;

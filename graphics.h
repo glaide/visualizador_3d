@@ -10,7 +10,7 @@
 #include <math.h>
 #define TRUE (1==1)
 #define FALSE (1==0)
-#define max 100
+#define max 150
 
 
 // funcao que gera as linhas
