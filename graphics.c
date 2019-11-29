@@ -9,6 +9,7 @@ void imprime_objeto(SDL_Renderer *renderer, convert *doisD, f *faces, int tamf, 
     
     //imprime os vertices
     for (int i=0; i<tamv; i++)
+    
         SDL_RenderDrawPoint(renderer, (int)doisD[i].x, (int)doisD[i].y);
     //desenha os pontos na tela
     //vericar como apagar as linhas repetidas
@@ -18,22 +19,29 @@ void imprime_objeto(SDL_Renderer *renderer, convert *doisD, f *faces, int tamf, 
         for (int k=0; k< faces[j].tamf; k++)
         {
 
-            if(faces[j].v[k] == tamf)
+            if(faces[j].v[k] == (tamf-1))
             {
             // caso seja o ultimo vertice
                 SDL_RenderDrawLine(renderer,
-                (int)doisD[faces[j].v[k]].x, 
-                (int)doisD[faces[j].v[k]].y, 
-                (int)doisD[faces[j].v[0]].x, 
-                (int)doisD[faces[j].v[0]].y);
+                round(doisD[faces[j].v[k]].x), 
+                round(doisD[faces[j].v[k]].y), 
+                round(doisD[faces[j].v[0]].x), 
+                round(doisD[faces[j].v[0]].y));
+		        printf("%i %i %i %i",doisD[faces[j].v[k]].x,
+                doisD[faces[j].v[k]].y,
+                doisD[faces[j].v[0]].x,
+                doisD[faces[j].v[0]].y);
             }
             else
             {
-                SDL_RenderDrawLine(renderer,
-                (int)doisD[faces[j].v[k]].x, 
-                (int)doisD[faces[j].v[k]].y,
-                (int)doisD[faces[j].v[k]+1].x,
-                (int)doisD[faces[j].v[k]+1].y);
+                // para todos os outros casos, faz a linha entre eles
+
+		        SDL_RenderDrawLine(renderer,
+		        round(doisD[faces[j].v[k]].x),
+                round(doisD[faces[j].v[k]].y),
+                round(doisD[faces[j].v[k]+1].x),
+                round(doisD[faces[j].v[k]+1].y));
+
             }
             
         }

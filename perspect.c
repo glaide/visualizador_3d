@@ -59,19 +59,3 @@ void conv_coord(convert *doisD, int tamV)
     }
 
 }
-
-void maiores(vert camera, vert *tresd, int tamv)
-{
-    camera.x=0;
-    camera.y=0;
-    camera.z=0;
-
-//verifica quais sao os maiores valores em 3d para setar a camera
-    for (int i=0; i < tamv; i++)
-    {
-        if (tresd[i].x > camera.x) camera.x = tresd[i].x;
-        if (tresd[i].y > camera.y) camera.y = tresd[i].y;
-        if (tresd[i].z > camera.z) camera.z = tresd[i].z;
-    }
-
-}

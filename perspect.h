@@ -17,8 +17,5 @@ void conv2d(convert *doisD, vert *vet, FILE *obj, int tamV, vert cam);
 
 void conv_coord(convert *doisD, int tamV);
 
-void maiores(vert camera, vert *tresd, int tamv);
-
-
 
 #endif
