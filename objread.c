@@ -57,7 +57,7 @@ int leVert(FILE *obj, vert *vetor)
         {
             //atualizo um novo tamanho com a soma de + 100
             nova = nvert + step;
-            vetor =(vert *) realloc(vetor, nova);
+            vetor = realloc(vetor, nova * sizeof(vert) );
             //verifica se foi alocado corretamente
             if (!vetor)
             {
@@ -120,7 +120,7 @@ int leFaces(FILE *obj, f *faces)
         {
             //atualizo um novo tamanho com a soma de + 100
             nova = step + maxfaces;
-            faces = (f *) realloc(faces, nova);
+            faces = (f *) realloc(faces, nova * sizeof(f));
             //verifica se foi alocado corretamente
             if (!faces)
             {
