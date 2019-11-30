@@ -24,6 +24,7 @@ int leVert(FILE *obj, vert *vetor)
     //salva o conteudo do objeto num vetor de char para poder cortar
     while (fgets(texto, tam, obj) != NULL)
     {
+	//caso acabem os v's e comece f, volta para reler e nao perder
         if (texto[0] == 'f')
         {
             fseek(obj, -strlen(texto), SEEK_CUR);
@@ -47,24 +48,22 @@ int leVert(FILE *obj, vert *vetor)
                 vetor[nvert].y = atof(str);
                 str = strtok(NULL, " ");
                 vetor[nvert].z = atof(str);
-                // fscanf("%i %i %i", &vetor[nvert].x &vetor[nvert].y &vetor[nvert].z );
+               
                 //incrementa a variavel com a quantidade de vertices
                 nvert++;
             }
-            // fgets(texto,tam*sizeof(char),obj);
         }
         else if (nvert == nova)
         {
             //atualizo um novo tamanho com a soma de + 100
-            nova = nova + step;
-            vetor = realloc(vetor, nova * sizeof(vert *));
+            nova = nvert + step;
+            vetor =(vert *) realloc(vetor, nova);
             //verifica se foi alocado corretamente
             if (!vetor)
             {
                 printf("Erro na alocação de memória, tente novamente...\n");
                 exit(-1);
             }
-            // fgets(texto,tam*sizeof(char),obj);
         }
     }
 
@@ -90,7 +89,6 @@ int leFaces(FILE *obj, f *faces)
     /*variavel usada para verificar qual é o 
     maior numero de vertices em uma face*/
     int maxfaces = 0;
-
     while (fgets(texto, tam, obj) != NULL)
     {
         //caso o tamanho alocado seja necessario
@@ -121,8 +119,8 @@ int leFaces(FILE *obj, f *faces)
         else if (nova == maxfaces)
         {
             //atualizo um novo tamanho com a soma de + 100
-            nova = step + nova;
-            faces = realloc(faces, nova * sizeof(f));
+            nova = step + maxfaces;
+            faces = (f *) realloc(faces, nova);
             //verifica se foi alocado corretamente
             if (!faces)
             {

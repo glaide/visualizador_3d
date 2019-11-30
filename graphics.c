@@ -11,14 +11,13 @@ void imprime_objeto(SDL_Renderer *renderer, convert *doisD, f *faces, int tamf, 
     for (int i = 0; i < tamv; i++)
         SDL_RenderDrawPoint(renderer, round(doisD[i].x), round(doisD[i].y));
 
-    //desenha os pontos na tela
-    //vericar como apagar as linhas repetidas
-
+    //caminha por todo o vetor de faces
     for (int j = 0; j < tamf; j++)
     {
+	    //dentro de cada face, verifica todos os vertices
         for (int k = 0; k < faces[j].tamf; k++)
         {
-            // para todos os outros casos, faz a linha entre eles
+            // liga todas as linhas  durante o for
             SDL_RenderDrawLine(renderer,
                                (int)(doisD[faces[j].v[k]-1].x),
                                (int)(doisD[faces[j].v[k]-1].y),

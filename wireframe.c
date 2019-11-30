@@ -49,6 +49,8 @@ int main(int argc, char **argv)
     }
     //le o numero de vertices em cada face e salva seus indices
     tamfaces = leFaces(obj, faces);
+    //apos pegar todas as informacoes, fecha o arquivo
+    fclose(obj);
     //aloca um novo espaço para a conversao 2d
     convert *novovert = malloc(tamvert * sizeof(convert *));
     if (novovert == NULL)
@@ -150,6 +152,9 @@ int main(int argc, char **argv)
     SDL_DestroyWindow(win);
 
     SDL_Quit();
-
+	
+    free(vertice);
+    free(novovert);
+    free(faces);
     return 0;
 }

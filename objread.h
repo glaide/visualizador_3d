@@ -12,7 +12,7 @@ GRR20184567
 
 #include <stdlib.h>
 #define tam 100
-#define step 100
+#define step 200
 #define colfaces 15
 
 //função que ignora comentarios
