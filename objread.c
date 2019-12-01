@@ -75,7 +75,7 @@ char *corte(char *str)
 {
     //ira dividir a palavra por / e retornar apenas a primeira parte
     char *aux = NULL;
-    aux = strtok(str, "/");
+    aux = strtok(str, "/ ");
     strtok(NULL, " ");
     return aux;
 }
@@ -102,13 +102,13 @@ int leFaces(FILE *obj, f *faces)
                 faces[maxfaces].tamf = 0;
                 int i=0;
                 // verifica se tem uma string em str
-                while( (str = strtok(NULL, " ")) != NULL)
+                while( (str = strtok(NULL, "/ ")) != NULL)
                 {
-                    // if (str[0]=='\n') break;
-                    //pega apenas o primeiro pedaço antes do /
-                    // str = corte(str);
+                    int tams=strlen(str);
                     faces[maxfaces].v[i] = atoi(str);
                     faces[maxfaces].tamf++;
+                    //verifica se era um valor com /
+                    if (str[tams-1] == '/') str = strtok(NULL, " ");
                     //incrementa a variavel com a quantidade de vertices
                     i++;
                 }
