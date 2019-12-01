@@ -18,16 +18,12 @@ void imprime_objeto(SDL_Renderer *renderer, convert *doisD, f *faces, int tamf, 
         for (int k = 0; k < faces[j].tamf; k++)
         {
             // liga todas as linhas  durante o for
+            /*usa o mod para poder pegar tbm 0 e tamf*/
             SDL_RenderDrawLine(renderer,
                                (int)(doisD[faces[j].v[k]-1].x),
                                (int)(doisD[faces[j].v[k]-1].y),
                                (int)(doisD[faces[j].v[(k + 1) % (faces[j].tamf )]-1].x),
                                (int)(doisD[faces[j].v[(k + 1) % (faces[j].tamf )]-1].y));
-            printf("%i %i %i %i\n",
-                   faces[j].v[k]-1 ,
-                   faces[j].v[k]-1 ,
-                   faces[j].v[(k + 1) % (faces[j].tamf )]-1 ,
-                   faces[j].v[(k + 1) % (faces[j].tamf )]-1 );
         }
     }
 }

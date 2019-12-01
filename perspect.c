@@ -6,14 +6,12 @@
 
 void conv2d(convert *doisD, vert *vet, FILE *obj, int tamV, vert cam)
 {
-    
     for (int i=0; i < tamV; i++)
     {
         // calcula a conversao para x e y em 2d
         doisD[i].x= cam.x + cam.z *( (vet[i].x - cam.x) / (vet[i].z + cam.z) );
         doisD[i].y= cam.y + cam.z *( (vet[i].y - cam.y) / (vet[i].z + cam.z) );
     }
-   
 }
 
 void conv_coord(convert *doisD, int tamV)
@@ -23,7 +21,6 @@ void conv_coord(convert *doisD, int tamV)
     // seta os primeiros valores para depois comparar
     x_min = x_max = doisD[0].x;
     y_min = y_max = doisD[0].y;
-
 
     // ira procurar os maiores e menores valores de x e y
     for (int i=1; i < tamV; i++)

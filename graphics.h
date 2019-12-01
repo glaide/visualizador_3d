@@ -10,11 +10,10 @@
 #include <math.h>
 #define TRUE (1==1)
 #define FALSE (1==0)
-#define max 150
+#define max 100
 
 
 // funcao que gera as linhas
 void imprime_objeto(SDL_Renderer *renderer, convert *doisD, f *faces, int tamf, int tamv);
-
 
 #endif

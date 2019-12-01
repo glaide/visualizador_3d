@@ -53,10 +53,12 @@ int leVert(FILE *obj, vert *vetor)
                 nvert++;
             }
         }
+        /*caso foi ate o max ja alocado*/
         else if (nvert == nova)
         {
             //atualizo um novo tamanho com a soma de + 100
             nova = nvert + step;
+            /*faz uma nova alocacao de espaco*/
             vetor = realloc(vetor, nova * sizeof(vert) );
             //verifica se foi alocado corretamente
             if (!vetor)
@@ -68,16 +70,6 @@ int leVert(FILE *obj, vert *vetor)
     }
 
     return nvert;
-}
-/*----------------RECEBE UMA STRING E CORTA O PRIMEIRO PEDAÇO----------------------*/
-//funcao para retornar apenas a primeira parte do valor de faces
-char *corte(char *str)
-{
-    //ira dividir a palavra por / e retornar apenas a primeira parte
-    char *aux = NULL;
-    aux = strtok(str, "/ ");
-    strtok(NULL, " ");
-    return aux;
 }
 
 /*----------------LE NUMERO DE FACES E SEUS VALORES----------------------*/
@@ -112,6 +104,7 @@ int leFaces(FILE *obj, f *faces)
                     //incrementa a variavel com a quantidade de vertices
                     i++;
                 }
+                /*incrementa a variavel com a quantidade de faces*/
                 maxfaces++;
             }
         }
@@ -120,6 +113,7 @@ int leFaces(FILE *obj, f *faces)
         {
             //atualizo um novo tamanho com a soma de + 100
             nova = step + maxfaces;
+            //faz uma nova alocação
             faces = (f *) realloc(faces, nova * sizeof(f));
             //verifica se foi alocado corretamente
             if (!faces)
@@ -129,5 +123,6 @@ int leFaces(FILE *obj, f *faces)
             }
         }
     }
+    /*retorna o valor total de faces*/
     return maxfaces;
 }

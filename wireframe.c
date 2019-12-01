@@ -82,10 +82,10 @@ int main(int argc, char **argv)
     //define as cores usadas para o desenho
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 
-    // SDL_SetRenderDrawColor(renderer, 255, 255, 0x00, 255);
     //limpa a tela de renderização
     SDL_RenderClear(renderer);
 
+    //parte que pega as teclas
     while (!sai)
     {
         /*acha o evento na fila*/
